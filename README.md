@@ -530,3 +530,470 @@ ApplicationGatewayFirewallLog
 - Regular review of ExpressRoute circuit utilization
 
 This comprehensive project demonstrates enterprise-grade Azure networking implementation with hybrid connectivity, multi-layered security, global distribution, and operational excellence practices.
+
+I've created a comprehensive and interactive architecture diagram that visualizes the entire Azure networking project. The diagram features:
+Visual Design:
+
+Modern, interactive design with hover effects and animations
+Color-coded components for easy identification
+Regional boundaries clearly defined
+Professional gradient backgrounds and shadows
+
+ Architecture Components:
+
+Hub-Spoke Topology: Central hub (Central US) with production (East US) and development (West US 2) spokes
+Hybrid Connectivity: ExpressRoute primary connection with VPN backup
+Global Services: Front Door and Azure DNS for worldwide distribution
+Security Layers: Azure Firewall, WAF, and NSGs throughout
+Load Balancing: Application Gateway and Internal Load Balancers
+
+ Key Features:
+
+IP Address Labeling: Clear CIDR notation for each VNet
+Connection Lines: Animated lines showing ExpressRoute, VPN, and VNet peering
+Component Legend: Color-coded legend for different service types
+Traffic Flow Summary: Below the diagram showing common traffic patterns
+
+Interactive Elements:
+
+Hover effects on regions and components
+Floating cloud animation for internet connectivity
+Pulsing connection lines to show active data flow
+Responsive design that works on different screen sizes
+
+The diagram effectively shows how all the components from the project work together:
+
+Traffic flows from internet through Front Door to Application Gateway
+On-premises connectivity via ExpressRoute with VPN failover
+Hub-spoke peering relationships
+Security enforcement points
+Load balancing at multiple tiers
+
+This visual representation makes it easy to understand the complex networking architecture and can be used for presentations, documentation, or team discussions about the implementation.
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Networking Architecture</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(102, 126, 234, 0.05) 50%, transparent 70%);
+            animation: shimmer 20s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .diagram {
+            position: relative;
+            width: 100%;
+            height: 1000px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .region {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .region:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .hub-region {
+            top: 400px;
+            left: 700px;
+            width: 400px;
+            height: 300px;
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+        }
+        
+        .prod-region {
+            top: 100px;
+            left: 1200px;
+            width: 350px;
+            height: 280px;
+            border-color: #27ae60;
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);
+        }
+        
+        .dev-region {
+            top: 750px;
+            left: 1200px;
+            width: 350px;
+            height: 200px;
+            border-color: #f39c12;
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
+        }
+        
+        .onprem {
+            top: 50px;
+            left: 50px;
+            width: 300px;
+            height: 200px;
+            border-color: #8e44ad;
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.1) 0%, rgba(142, 68, 173, 0.05) 100%);
+        }
+        
+        .global-services {
+            top: 50px;
+            left: 400px;
+            width: 250px;
+            height: 150px;
+            border-color: #3498db;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+        }
+        
+        .region-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .component {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 0.85em;
+            color: #2c3e50;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .component:hover {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            transform: scale(1.05);
+        }
+        
+        .subnet {
+            background: linear-gradient(145deg, #e8f4fd, #dbeafe);
+            border: 1px solid #3498db;
+            color: #2980b9;
+        }
+        
+        .gateway {
+            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
+            border: 1px solid #f39c12;
+            color: #e67e22;
+        }
+        
+        .security {
+            background: linear-gradient(145deg, #f8d7da, #f5c6cb);
+            border: 1px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .load-balancer {
+            background: linear-gradient(145deg, #d1ecf1, #bee5eb);
+            border: 1px solid #17a2b8;
+            color: #0c5460;
+        }
+        
+        .connection {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .connection-label {
+            position: absolute;
+            background: rgba(255,255,255,0.95);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            color: #2c3e50;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Connection lines */
+        .conn-er {
+            top: 180px;
+            left: 350px;
+            width: 350px;
+            transform: rotate(15deg);
+        }
+        
+        .conn-vpn {
+            top: 120px;
+            left: 350px;
+            width: 350px;
+            transform: rotate(-15deg);
+        }
+        
+        .conn-peering1 {
+            top: 320px;
+            left: 1100px;
+            width: 100px;
+            transform: rotate(-45deg);
+        }
+        
+        .conn-peering2 {
+            top: 680px;
+            left: 1100px;
+            width: 100px;
+            transform: rotate(45deg);
+        }
+        
+        .internet-cloud {
+            position: absolute;
+            top: 250px;
+            left: 200px;
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 0.8em;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        
+        .ip-labels {
+            position: absolute;
+            font-size: 0.7em;
+            color: #666;
+            background: rgba(255,255,255,0.9);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .hub-ip { top: 380px; left: 720px; }
+        .prod-ip { top: 80px; left: 1220px; }
+        .dev-ip { top: 730px; left: 1220px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Azure Networking Architecture - TechCorp Enterprise</h1>
+        
+        <div class="diagram">
+            <!-- IP Address Labels -->
+            <div class="ip-labels hub-ip">Hub VNet: 10.0.0.0/16</div>
+            <div class="ip-labels prod-ip">Prod VNet: 10.1.0.0/16</div>
+            <div class="ip-labels dev-ip">Dev VNet: 10.2.0.0/16</div>
+            
+            <!-- Internet Cloud -->
+            <div class="internet-cloud">
+                ☁️ Internet
+            </div>
+            
+            <!-- On-Premises -->
+            <div class="region onprem">
+                <div class="region-title">🏢 On-Premises</div>
+                <div class="component">Corporate Network</div>
+                <div class="component">172.16.0.0/16</div>
+                <div class="component">BGP ASN: 65001</div>
+                <div class="component">Domain Controllers</div>
+                <div class="component">File Servers</div>
+            </div>
+            
+            <!-- Global Services -->
+            <div class="region global-services">
+                <div class="region-title">🌍 Global Services</div>
+                <div class="component security">Front Door + WAF</div>
+                <div class="component">Azure DNS</div>
+                <div class="component">app.techcorp.com</div>
+            </div>
+            
+            <!-- Hub Region (Central US) -->
+            <div class="region hub-region">
+                <div class="region-title">🎯 Hub - Central US</div>
+                <div class="subnet">GatewaySubnet: 10.0.1.0/27</div>
+                <div class="gateway">ExpressRoute Gateway</div>
+                <div class="gateway">VPN Gateway (Backup)</div>
+                <div class="subnet">AzureFirewallSubnet: 10.0.2.0/26</div>
+                <div class="security">Azure Firewall</div>
+                <div class="subnet">Shared Services: 10.0.10.0/24</div>
+                <div class="component">DNS Servers</div>
+                <div class="component">Domain Controllers</div>
+            </div>
+            
+            <!-- Production Region (East US) -->
+            <div class="region prod-region">
+                <div class="region-title">🚀 Production - East US</div>
+                <div class="load-balancer">Application Gateway v2</div>
+                <div class="security">WAF Protection</div>
+                <div class="subnet">Web Tier: 10.1.1.0/24</div>
+                <div class="subnet">App Tier: 10.1.2.0/24</div>
+                <div class="load-balancer">Internal Load Balancer</div>
+                <div class="subnet">Data Tier: 10.1.3.0/24</div>
+                <div class="subnet">Integration: 10.1.4.0/24</div>
+            </div>
+            
+            <!-- Development Region (West US 2) -->
+            <div class="region dev-region">
+                <div class="region-title">🔧 Development - West US 2</div>
+                <div class="subnet">Dev Web: 10.2.1.0/24</div>
+                <div class="subnet">Dev App: 10.2.2.0/24</div>
+                <div class="subnet">Dev Data: 10.2.3.0/24</div>
+                <div class="component">Scale Set (3 VMs)</div>
+            </div>
+            
+            <!-- Connection Lines -->
+            <div class="connection conn-er">
+                <div class="connection-label" style="top: -25px; left: 120px;">ExpressRoute (1Gbps)</div>
+            </div>
+            
+            <div class="connection conn-vpn">
+                <div class="connection-label" style="top: 15px; left: 120px;">Site-to-Site VPN</div>
+            </div>
+            
+            <div class="connection conn-peering1">
+                <div class="connection-label" style="top: -25px; left: 20px;">VNet Peering</div>
+            </div>
+            
+            <div class="connection conn-peering2">
+                <div class="connection-label" style="top: 15px; left: 20px;">VNet Peering</div>
+            </div>
+            
+            <!-- Additional connection lines for global services -->
+            <div class="connection" style="top: 125px; left: 650px; width: 550px; transform: rotate(5deg);">
+                <div class="connection-label" style="top: -25px; left: 200px;">HTTPS/443</div>
+            </div>
+            
+            <!-- Legend -->
+            <div class="legend">
+                <h4 style="margin-top: 0;">🔍 Component Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(145deg, #e8f4fd, #dbeafe);"></div>
+                    <span>Subnets & Networks</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(145deg, #fff3cd, #ffeaa7);"></div>
+                    <span>Gateways</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(145deg, #f8d7da, #f5c6cb);"></div>
+                    <span>Security Components</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(145deg, #d1ecf1, #bee5eb);"></div>
+                    <span>Load Balancers</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px;">
+            <h3>🔗 Traffic Flow Summary</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 15px;">
+                <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #e74c3c; margin-top: 0;">🌐 Internet → Application</h4>
+                    <p>Internet → Front Door → Application Gateway → Web Tier VMs</p>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #27ae60; margin-top: 0;">🏢 On-Premises → Azure</h4>
+                    <p>Corporate Network → ExpressRoute/VPN → Hub VNet → Spoke VNets</p>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #3498db; margin-top: 0;">🔄 Inter-VNet Communication</h4>
+                    <p>Spoke VNets ↔ Hub VNet ↔ Other Spoke VNets via VNet Peering</p>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #f39c12; margin-top: 0;">🛡️ Security Enforcement</h4>
+                    <p>All traffic flows through Azure Firewall, WAF, and NSG controls</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
