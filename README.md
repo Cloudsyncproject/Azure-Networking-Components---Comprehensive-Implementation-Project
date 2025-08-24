@@ -531,7 +531,7 @@ ApplicationGatewayFirewallLog
 
 This comprehensive project demonstrates enterprise-grade Azure networking implementation with hybrid connectivity, multi-layered security, global distribution, and operational excellence practices.
 
-I've created a comprehensive and interactive architecture diagram that visualizes the entire Azure networking project. The diagram features:
+A comprehensive and interactive architecture diagram that visualizes the entire Azure networking project. The diagram features:
 Visual Design:
 
 Modern, interactive design with hover effects and animations
